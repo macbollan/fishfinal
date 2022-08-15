@@ -1,7 +1,7 @@
 
 
 const mongoose = require('mongoose');
-//  mongoose.connect("mongodb+srv://macb:vGdEAESmK0GRqDrl@cluster.xfzxm.mongodb.net/?retryWrites=true&w=majority");
+ mongoose.connect("mongodb+srv://macb:vGdEAESmK0GRqDrl@cluster.xfzxm.mongodb.net/?retryWrites=true&w=majority");
 require('dotenv').config();
 
 var express=require("express");
@@ -32,7 +32,7 @@ const formidable = require('formidable');
 var fileSystem = require("fs");
 
 
-mongoose.connect("mongodb://localhost/fishywithvideos5");
+// mongoose.connect("mongodb://localhost/fishywithvideos5");
 
 // const connectDB= async()=>{
 //     try{
