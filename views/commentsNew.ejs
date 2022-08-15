@@ -1,0 +1,20 @@
+<%- include("partials/header.ejs"); -%>
+<div  class="container">
+    <h1> Add a Comment</h1>
+   
+        <form action="/blogs/<%=blog._id%>/comments" method="POST" >
+            <input class="form-control" type="text" placeholder="text" name="com[text]">
+            <!-- <input class="form-control" type="text" placeholder="author" name="com[author]"> -->
+            <button class="btn  btn-primary btn-sm">Submit</button>
+        </form>
+       <div>
+        <a href="/blogs" class="btn btn-primary btn-sm ">Go Back</a>
+       </div>
+    
+  
+        
+</div>
+
+        
+<%- include("partials/footer.ejs"); -%>
+       

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Fisheries Trust</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Saira+Stencil+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+	<!-- Favicon -->
+	<!-- Site All Style Sheet Css -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="assets/css/icofont.min.css" rel="stylesheet" />
+	<link href="assets/css/magnific-popup.css" rel="stylesheet" />
+	<link href="assets/css/animate.min.css" rel="stylesheet" />
+	<link href="assets/css/owl.carousel.min.css" rel="stylesheet" />
+	<link href="assets/css/owl.theme.default.min.css" rel="stylesheet" />
+	<link href="assets/css/swiper.min.css" rel="stylesheet" />
+	<!-- Site Main Style Sheet Css -->
+	<link href="assets/css/style.css" rel="stylesheet" />
+	<link href="assets/css/responsive.css" rel="stylesheet" />
+  
+</head>
+
+<body>
+
+
+
+<div style="background-color: black;">
+  <a href="/"> <img src="Screenshot (86).png" alt="fisherietrust" class="img-circle" style="width: 15px;"></a>
+</div>
+
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+
+
+<div id="campgroundsContainer" class="container mt-4">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="d-none d-md-block">
+          <div class="lead text-center text-capitalize">
+            <h2><%= blog.name %></h2>
+          </div>
+
+          
+         
+        </div>
+      </div>
+
+
+      <div class="col-md-9">
+        <div class="card shadow-sm">
+          <img class="card-img-top" src="<%= blog.img %>">
+          <div class="card-body">
+            <h5 class="card-title float-right">By:
+              <%= blog.author.username %></h5>
+
+
+              
+            <h5 class="card-title text-capitalize">
+            <%= blog.name %>
+            <div>
+              <% if(blog.comments.length === 0) { %>
+                <small class="text-muted">No Reviews</small>
+              <% } else { %>
+            
+                <% if (blog.comments.length === 1) { %>
+                  <small class="text-muted"><%= blog.comments.length %> Review</small>
+                <% } else { %>
+                  <small class="text-muted"><%= blog.comments.length %> Reviews</small>
+                <% } %>
+              <% } %>
+            </div>
+          </h5>
+            <p class="card-text">
+              <%= blog.description %>
+            </p>
+            <hr>
+            <p class="card-text text-muted">
+              <span>Submitted by
+              <a href="/users/<%= blog.author.id %>">
+                <%= blog.author.username %></a> on
+              <%= moment(blog.timeCreated).format('LL') %>
+            </span>
+            </p>
+            <% if(currentUser && blog.author.id.equals(currentUser.id)) { %>
+              <form id="deleteForm" action="/blogss/<%= blog._id %>?_method=DELETE" method="POST" class="float-right">
+                <button class="delBtn btn text-dark btn-lg">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+              </form>
+              <a href="/blogs/<%= blog._id %>/edit" class="btn text-dark btn-lg float-right">
+              <i class="fas fa-pencil-alt"></i>
+            </a>
+              <% } %>
+              
+              
+          </div>
+        </div>
+        <div class="card shadow-sm mt-4" id="comments">
+          <ul class="list-group list-group-flush">
+            <% if(currentUser && blog.author.id.equals(currentUser._id)) { %>
+              <li id="commentItem" class="list-group-item list-group-item-light">
+                Your blog has
+                <% if (blog.comments.length === 0) { %>
+                  no reviews.
+                  <% } else if (blog.comments.length === 1) { %>
+                    1 review
+                    <% } else { %>
+                      <%= blog.comments.length %> reviews
+                        <% } %>
+              </li>
+              <% } else { %>
+                <li id="commentItem" class="list-group-item list-group-item-light">
+                  <button class="btn btn-danger float-right" data-toggle="collapse" data-target="#collapseComment" aria-expanded="false" aria-controls="collapseComment">Leave a Review</button>
+                </li>
+                <% } %>
+                  <div  id="collapseComment" style="background-color: lightgray;">
+                    <div class="card-body">
+                      <form class="needs-validation" action="/blogs/<%= blog._id %>/comments" method="POST">
+                        <div class="form-group">
+                          <textarea class="form-control" id="exampleFormControlTextarea1" name="text" rows="3" placeholder="Type your comment here" required></textarea>
+                          <div class="invalid-feedback">
+                            You cannot leave this part blank.
+                          </div>
+                        </div>
+                       
+                        <button type="submit" class="btn btn-danger btn-sm">Submit</button>
+                        <button type="reset" class="btn btn-secondary btn-sm float right">Reset</button>
+                      </form>
+                    </div>
+                  </div>
+                  <% blog.comments.forEach(function(comment){ %>
+                    <li class="list-group-item"  style="background-color: lightgray; text-color: white;" >
+                      <p>
+                        <i class="fas fa-user"></i>
+                        <span style="color: blue;">
+                          <%= comment.author.username %>
+                        </span>
+                        <span class="float-right text-muted">
+
+                
+                  <small><%= moment(comment.dateCreated).fromNow() %></small>
+                </span>
+                      </p>
+                      <span class="text-muted">
+                <%- comment.text %>
+              </span>
+                      <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
+                        <div class="float-right">
+                          <a class="btn text-dark" data-toggle="collapse" data-target="#editComment" aria-expanded="false" aria-controls="editComment">
+                    <i class="fas fa-pencil-alt"></i>
+                  </a>
+                          <form id="deleteForm2" action="/blogs/<%= blog._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" class="float-right">
+                            <button class="delBtn btn text-dark">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                          </form>
+                        </div>
+                        <div class="collapse" id="editComment">
+                          <div class="card-body">
+                            <form class="needs-validation" action="/blogs/<%= blog._id %>/comments/<%= comment._id %>?_method=PUT" method="POST" novalidate>
+                              <div class="form-group">
+                                <textarea class="form-control" id="exampleFormControlTextarea1" name="text" rows="3" required><%= comment.text %></textarea>
+                                <div class="invalid-feedback">
+                                  You cannot leave this part blank.
+                                </div>
+                              </div>
+                              
+                              <button type="submit" class="btn btn-danger btn-sm">Edit Review</button>
+                              <button type="reset" class="btn btn-secondary btn-sm float right">Reset</button>
+                            </form>
+                          </div>
+                        </div>
+                      </li>
+                      <% } %>
+                    <% }) %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+<!-- ================================================================================================================================================== -->
+
+<!-- FOOTER -->
+
+<!-- ================================================================================================================================================== --><footer id="footer" class="site-footer">
+
+<div style="background-color: black; text-align: center; padding: 20px;">
+  <div style="padding: 20px;">
+    <a href="/blogs"  class="btn btn-success"> Go back</a>
+
+  </div>
+
+  <div>
+    <a href="/" class="btn btn-success"> Visit Home page</a>
+
+  </div>
+
+  <div style="padding: 20px;">
+    <a href="/new" class="btn btn-success" > Add a new post</a>
+
+  </div>
+</div>
+
+
+</body>
+
+</html>

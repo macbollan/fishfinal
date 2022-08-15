@@ -1,0 +1,11 @@
+install mangoose
+install middleware
+install connect-flash
+install flash
+install cookie-parser
+git
+passport-local-mongoose
+passport-local
+passport
+express-session
+

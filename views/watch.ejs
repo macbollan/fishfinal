@@ -1,0 +1,80 @@
+<%- include("partials/header.ejs"); -%>
+
+<div class="container">
+
+    <header class="jumbotron">
+        <div class="container">
+          <h1>Stream videos</h1>
+          <p>Upload videos and give a description</p>
+          <p style="padding: 10px;">
+            <a href="/new" class="btn btn-primary btn-lg">Add a blog</a>
+            <a href="/" class="btn btn-primary btn-lg">visit home</a>
+           
+              <a href="/blogs" class="btn btn-primary btn-lg">go back</a>
+          </p>
+        </div>
+      </header>
+<% videos.forEach(function (video) { %>
+
+  
+<!--   
+     <div>
+       <h2><%= video.title %></h2>
+       <video width="320" height="240" controls>
+          <source src="/videos/<%=video.filePath %>" type="video/mp4">
+          <source src="/videos/<%=video.filePath %>" type="video/ogg">
+        Your browser does not support the video tag.
+        </video>
+        <%= video.description %>
+     
+        <% if(currentUser && video.author.id.equals(currentUser.id)) { %>
+         <form id="deleteForm" style="text-align: center; padding: 10px;" action="/delete-video/<%=video._id %>?_method=DELETE" method="POST">
+         <p>     <button class="delBtn btn btn-danger btn-md">Delete the post</button>
+       </p> 
+         </form>
+         <% } %>
+         </form>
+     </div>  
+      -->
+     
+
+     <div class="card mb-3" >
+        <div class="row">
+            <div class="col-md-4">
+                
+                <video width="320" height="240" controls>
+                    <source src="<%=video.filePath %>" type="video/mp4">
+                    <source src="<%=video.filePath %>" type="video/ogg">
+                  Your browser does not support the video tag.
+                  </video>
+                
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title"><%= video.title %></h2>
+                    <p>By: <%= video.author.username %></p>
+                    <p class="card-text"><small class="text-muted">Updated on:   <%= moment(video.timeCreated).format('LL') %> </small></p>
+
+                    <div class="sidebar-box">
+                      <p class="card-text"> <%= video.description %></p>
+                     
+                    </div>
+
+                    <% if(currentUser && video.author.id.equals(currentUser.id)) { %>
+                        <form id="deleteForm" style="text-align: center; padding: 10px;" action="/delete-video/<%=video._id %>?_method=DELETE" method="POST">
+                        <p>     <button class="delBtn btn btn-danger btn-md">Delete the post</button>
+                      </p> 
+                        </form>
+                        <% } %>
+                        </form>
+  
+                </div>
+            </div>
+        </div>
+     
+     
+     <% }) %>
+     
+    </div>               
+  <%- include("partials/footer.ejs"); -%>
+  
