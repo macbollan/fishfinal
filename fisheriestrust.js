@@ -613,5 +613,5 @@ function isLoggedIn(req,res,next){
 // MIDDLEWARES CAN BE REFACTORED INTO ANOTHER DIR AND THEN REQUIRED  
 
 app.listen(80, function(){
-    console.log("App Has Started!!!! on port 122");
+    console.log("App Has Started!!!! on port 80");
 });
