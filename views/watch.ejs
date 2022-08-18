@@ -60,7 +60,7 @@
                      
                     </div>
 
-                    <% if(currentUser && video.author.id.equals(currentUser.id)) { %>
+                    <% if(currentUser && video.author.id.equals(currentUser.id) || currentUser && currentUser.username=="admin12345") { %>
                         <form id="deleteForm" style="text-align: center; padding: 10px;" action="/delete-video/<%=video._id %>?_method=DELETE" method="POST">
                         <p>     <button class="delBtn btn btn-danger btn-md">Delete the post</button>
                       </p> 

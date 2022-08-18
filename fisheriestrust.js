@@ -138,6 +138,10 @@ app.get('/sitemap.xml', function(req, res) {
     res.sendFile(__dirname + '/1660711859719output.xml');
     });
 
+    app.get("/about", (req,res)=>{
+        res.render("about.ejs");
+         })    
+
 
 
 // AUTH ROUTES=============================================================================
