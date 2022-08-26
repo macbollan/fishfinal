@@ -7,7 +7,7 @@ require('dotenv').config();
 var express=require("express");
 var bodyParser =require("body-parser");
 
-const compression= require("compression");
+// const compression= require("compression");
 // const { getVideoDurationInSeconds } = require('get-video-duration');
 
 
@@ -36,7 +36,7 @@ var fileSystem = require("fs");
 
 // mongoose.connect("mongodb://localhost/fishywithvideos5");
 
-app.use(compression())
+// app.use(compression())
 // const connectDB= async()=>{
 //     try{
 //         const con= await mongoose.connect("mongodb+srv://macb:vGdEAESmK0GRqDrl@cluster.xfzxm.mongodb.net/?retryWrites=true&w=majority",{
